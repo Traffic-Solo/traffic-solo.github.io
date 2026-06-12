@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Solo | Google Ads & Meta Ads управління</title>
+    <meta name="description" content="Traffic Solo — управління Google Ads та Meta Ads з фокусом на ROI. Понад 500 успішних кампаній, середній ROI 4.2x. Безкоштовна консультація.">
+    <meta property="og:title" content="Traffic Solo | Google Ads & Meta Ads управління">
+    <meta property="og:description" content="Управління Google Ads та Meta Ads з фокусом на ROI. Безкоштовна консультація — аудит, дорожня карта, оцінка потенціалу.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-56S8RML2');</script>
+    <!-- End Google Tag Manager -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+        }
+
+        .fade-in.visible {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 200, 83, 0.2);
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #00C853;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #00C853;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #00C853;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: #00C853;
+            color: #0a0a0a;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .cta-button:hover {
+            background-color: #00E64D;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 200, 83, 0.3);
+        }
+
+        .cta-button-secondary {
+            background-color: transparent;
+            color: #00C853;
+            border: 2px solid #00C853;
+            padding: 0.65rem 1.4rem;
+        }
+
+        .cta-button-secondary:hover {
+            background-color: rgba(0, 200, 83, 0.1);
+            color: #00E64D;
+            border-color: #00E64D;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 200, 83, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 .green-text {
+            color: #00C853;
+        }
+
+        .hero .subheadline {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero .cta-button {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: #111;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #00C853;
+            margin: 1rem auto 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00C853;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #c0c0c0;
+            font-size: 1.05rem;
+        }
+
+        .about-features {
+            list-style: none;
+        }
+
+        .about-features li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #c0c0c0;
+        }
+
+        .about-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00C853;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-box {
+            background-color: rgba(0, 200, 83, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #00C853;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #00C853;
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: #0a0a0a;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: #1a1a1a;
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 200, 83, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            border-color: #00C853;
+            box-shadow: 0 15px 40px rgba(0, 200, 83, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00C853;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .service-icon {
+            font-size: 1.8rem;
+        }
+
+        .service-card p {
+            color: #c0c0c0;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #a0a0a0;
+            font-size: 0.95rem;
+        }
+
+        .service-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #00C853;
+        }
+
+        /* Why Us Section */
+        .why-us {
+            padding: 80px 0;
+            background-color: #111;
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .value-box {
+            background-color: rgba(0, 200, 83, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 200, 83, 0.15);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-box:hover {
+            background-color: rgba(0, 200, 83, 0.1);
+            border-color: #00C853;
+            transform: translateY(-8px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-box h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #00C853;
+        }
+
+        .value-box p {
+            color: #b0b0b0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Cases Section */
+        .cases {
+            padding: 80px 0;
+            background-color: #0a0a0a;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .case-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 200, 83, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .case-card:hover {
+            border-color: #00C853;
+            transform: translateY(-5px);
+        }
+
+        .case-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .case-client {
+            color: #00C853;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .case-title {
+            font-size: 1.3rem;
+            margin-top: 0.5rem;
+            color: #e0e0e0;
+            font-weight: 700;
+        }
+
+        .case-metrics {
+            background-color: rgba(0, 200, 83, 0.1);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0, 200, 83, 0.15);
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .metric-value {
+            color: #00C853;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .case-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 80px 0;
+            background-color: #111;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #c0c0c0;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background-color: #1a1a1a;
+            border: 1px solid rgba(0, 200, 83, 0.3);
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #00C853;
+            background-color: #222;
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #666;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.1rem;
+            background-color: #00C853;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            background-color: #00E64D;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 200, 83, 0.3);
+        }
+
+        .form-submit:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-message {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .form-message.success {
+            background-color: rgba(0, 200, 83, 0.2);
+            color: #00C853;
+            border: 1px solid rgba(0, 200, 83, 0.4);
+            display: block;
+        }
+
+        .form-message.error {
+            background-color: rgba(220, 50, 50, 0.2);
+            color: #ff6b6b;
+            border: 1px solid rgba(220, 50, 50, 0.4);
+            display: block;
+        }
+
+        /* Contacts Section */
+        .contacts {
+            padding: 80px 0;
+            background-color: #0a0a0a;
+        }
+
+        .contacts-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-pills {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-pill {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background-color: rgba(0, 200, 83, 0.05);
+            border: 1px solid rgba(0, 200, 83, 0.2);
+            border-radius: 8px;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-pill:hover {
+            background-color: rgba(0, 200, 83, 0.1);
+            border-color: #00C853;
+            color: #00C853;
+            transform: translateY(-3px);
+        }
+
+        .contact-pill-icon {
+            font-size: 1.5rem;
+        }
+
+        .contact-message {
+            padding: 2rem;
+            background-color: rgba(0, 200, 83, 0.1);
+            border-left: 4px solid #00C853;
+            border-radius: 6px;
+        }
+
+        .contact-message h4 {
+            color: #00C853;
+            margin-bottom: 1rem;
+        }
+
+        .contact-message p {
+            color: #b0b0b0;
+            line-height: 1.7;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background-color: #111;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 200, 83, 0.2);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: #00C853;
+            transform: translateY(-5px);
+        }
+
+        .testimonial-stars {
+            color: #00C853;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            color: #c0c0c0;
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .testimonial-author {
+            color: #00C853;
+            font-weight: 700;
+        }
+
+        .testimonial-role {
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background-color: #0a0a0a;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 200, 83, 0.15);
+            padding: 1.5rem 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .faq-question:hover {
+            color: #00C853;
+        }
+
+        .faq-icon {
+            color: #00C853;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            color: #b0b0b0;
+            line-height: 1.7;
+            margin-top: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            margin-top: 0.75rem;
+            max-height: 300px;
+        }
+
+        /* Urgency Banner */
+        .urgency-banner {
+            background-color: rgba(0, 200, 83, 0.1);
+            border: 1px solid rgba(0, 200, 83, 0.4);
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+            text-align: center;
+            color: #00C853;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Telegram quick-contact link under form */
+        .telegram-cta-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.25rem;
+            color: #00C853;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .telegram-cta-link:hover {
+            color: #00E64D;
+            text-decoration: underline;
+        }
+
+        /* Floating CTA Button */
+        .floating-cta {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background-color: #00C853;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0a0a;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 999;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 200, 83, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .floating-cta:hover {
+            background-color: #00E64D;
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            border-top: 1px solid rgba(0, 200, 83, 0.2);
+            padding: 2rem 0;
+            text-align: center;
+            color: #888;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .subheadline {
+                font-size: 1.1rem;
+            }
+
+            .hero .cta-group {
+                flex-direction: column;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-us-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .contacts-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-box {
+                padding: 1.5rem;
+            }
+
+            .floating-cta {
+                width: 55px;
+                height: 55px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56S8RML2"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Traffic Solo</a>
+                <nav>
+                    <a href="#about">Про нас</a>
+                    <a href="#services">Послуги</a>
+                    <a href="#why-us">Чому ми</a>
+                    <a href="#cases">Кейси</a>
+                    <a href="#contacts">Контакти</a>
+                    <a href="#form" class="cta-button">Консультація</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Реклама, яка <span class="green-text">приносить заявки</span>, а не звіти про охоплення</h1>
+                <p class="subheadline">Беремо на себе Google Ads та Meta Ads, щоб ви бачили клієнтів, а не таблиці з незрозумілими цифрами. Понад 500 кампаній, середній ROI 4.2x.</p>
+                <div class="cta-group">
+                    <a href="#form" class="cta-button">Отримати консультацію</a>
+                    <a href="#cases" class="cta-button cta-button-secondary">Переглянути кейси</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">Про Traffic Solo</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3>Знайома ситуація?</h3>
+                    <p>Реклама "якось працює", але ви не можете пояснити, чому в один місяць заявки є, а в інший — ні. Попередній підрядник зник після запуску кампаній і не виходить на зв'язок. Звіти — це скриншоти з кабінету раз на місяць, без пояснень.</p>
+                    <p>Traffic Solo бере на себе повне управління Google Ads та Meta Ads: ми щодня дивимось у цифри, тестуємо гіпотези та відповідаємо на повідомлення протягом робочого дня. Ваша задача — обробляти заявки, а не розбиратись у рекламному кабінеті.</p>
+                    <ul class="about-features">
+                        <li>Управління кампаніями від <strong>$1,000/місяць</strong></li>
+                        <li>Звіти та дашборди в реальному часі — без очікування "наприкінці місяця"</li>
+                        <li>Персональний менеджер, що відповідає протягом дня</li>
+                        <li>Щомісячний розбір результатів і план на наступний місяць</li>
+                    </ul>
+                </div>
+                <div class="about-stats fade-in">
+                    <div class="stat-box">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">успішних кампаній</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">4.2x</div>
+                        <div class="stat-label">середній ROI клієнтів</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">$8M+</div>
+                        <div class="stat-label">витрачено на рекламу</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">задоволення клієнтів</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title fade-in">Послуги</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <h3><span class="service-icon">🔍</span>Google Ads</h3>
+                    <p>Повне управління кампаніями пошукової реклами та дисплей-мережі — від структури акаунту до щотижневої оптимізації. Без зайвого нагляду з вашого боку.</p>
+                    <ul class="service-features">
+                        <li>Search Ads (заявки від людей, що вже шукають рішення)</li>
+                        <li>Display Ads (охоплення та ремаркетинг)</li>
+                        <li>Remarketing (повернення відвідувачів сайту)</li>
+                        <li>Performance Max (автоматизація з контролем результату)</li>
+                        <li>Робота над Quality Score — нижча ціна за клік</li>
+                        <li>A/B тестування текстів та посадкових сторінок</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in">
+                    <h3><span class="service-icon">📱</span>Meta Ads (Facebook & Instagram)</h3>
+                    <p>Креативи та таргетинг, які доводять людину від першого контакту до заявки чи покупки.</p>
+                    <ul class="service-features">
+                        <li>Дослідження аудиторій (LLA, CLA, LAA)</li>
+                        <li>Розробка та тестування креативів щотижня</li>
+                        <li>Dynamic Product Ads для e-commerce</li>
+                        <li>Lead generation та conversion-кампанії</li>
+                        <li>Ретаргетинг і повернення тих, хто не купив</li>
+                        <li>Щомісячний перегляд і перерозподіл бюджету</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="why-us" id="why-us">
+        <div class="container">
+            <h2 class="section-title fade-in">Чому вибирають Traffic Solo</h2>
+            <div class="why-us-grid">
+                <div class="value-box fade-in">
+                    <div class="value-icon">📊</div>
+                    <h4>Заявки, а не покази</h4>
+                    <p>Ми звітуємо в лідах, заявках і продажах — а не в охопленні чи кліках. Кожна кампанія має конкретну ціль за вартістю ліда та ROI.</p>
+                </div>
+                <div class="value-box fade-in">
+                    <div class="value-icon">👨‍💼</div>
+                    <h4>Один менеджер, без передачі "по колу"</h4>
+                    <p>Ваш проєкт веде одна людина від початку до кінця — знає вашу нішу, цілі та історію кампаній. Не доведеться щомісяця заново все пояснювати.</p>
+                </div>
+                <div class="value-box fade-in">
+                    <div class="value-icon">📈</div>
+                    <h4>Масштабування без втрати якості</h4>
+                    <p>Бюджет збільшуємо поступово і тільки на кампаніях, які вже стабільно показують результат — без різких стрибків і просідання ROI.</p>
+                </div>
+                <div class="value-box fade-in">
+                    <div class="value-icon">🎯</div>
+                    <h4>Аудиторія під ваш бізнес</h4>
+                    <p>Перед запуском розбираємось, хто ваш клієнт, як він шукає рішення і на що реагує — а не запускаємо типові налаштування "за замовчуванням".</p>
+                </div>
+                <div class="value-box fade-in">
+                    <div class="value-icon">💬</div>
+                    <h4>Доступ до цифр у будь-який момент</h4>
+                    <p>Дашборд у Looker Studio з щоденним оновленням: скільки витрачено, скільки заявок отримано, який CPA та ROAS. Не треба писати менеджеру, щоб дізнатись цифри.</p>
+                </div>
+                <div class="value-box fade-in">
+                    <div class="value-icon">⚡</div>
+                    <h4>Реакція без затримок</h4>
+                    <p>Якщо кампанія "просіла" або CPA виріс — ми реагуємо протягом дня, а не на наступному щомісячному дзвінку.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases Section -->
+    <section class="cases" id="cases">
+        <div class="container">
+            <h2 class="section-title fade-in">Наші результати</h2>
+            <div class="cases-grid">
+                <div class="case-card fade-in">
+                    <div class="case-header">
+                        <div class="case-client">e-commerce / мода</div>
+                        <div class="case-title">Масштабування магазину в Instagram</div>
+                    </div>
+                    <div class="case-metrics">
+                        <div class="metric">
+                            <span class="metric-label">ROAS</span>
+                            <span class="metric-value">4.8x</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">CPA</span>
+                            <span class="metric-value">$12</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Період</span>
+                            <span class="metric-value">3 місяці</span>
+                        </div>
+                    </div>
+                    <div class="case-description">
+                        Переробили аудиторії та креативи. Перейшли з холодного трафіку на look-alike та retargeting. Випускали 3 нові креативи щотижня. Результат: виручка зросла на $45K за квартал при витратах $9.4K.
+                    </div>
+                </div>
+                <div class="case-card fade-in">
+                    <div class="case-header">
+                        <div class="case-client">b2b SaaS / CRM</div>
+                        <div class="case-title">Зниження вартості ліда на 62%</div>
+                    </div>
+                    <div class="case-metrics">
+                        <div class="metric">
+                            <span class="metric-label">CPL раніше</span>
+                            <span class="metric-value">$58</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">CPL тепер</span>
+                            <span class="metric-value">$22</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Період</span>
+                            <span class="metric-value">6 місяців</span>
+                        </div>
+                    </div>
+                    <div class="case-description">
+                        Клієнт отримував багато лідів, але більшість не доходили до угоди. Перебудували таргетинг і офер під якісніших лідів, підняли Quality Score до 8+. Лідів стало менше, зате конверсія у продаж зросла на 34%.
+                    </div>
+                </div>
+                <div class="case-card fade-in">
+                    <div class="case-header">
+                        <div class="case-client">Онлайн освіта / курси</div>
+                        <div class="case-title">Перехід на 100% беззбиткові кампанії</div>
+                    </div>
+                    <div class="case-metrics">
+                        <div class="metric">
+                            <span class="metric-label">ROI</span>
+                            <span class="metric-value">3.2x</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Лідів/місяць</span>
+                            <span class="metric-value">180+</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Період</span>
+                            <span class="metric-value">2 місяці</span>
+                        </div>
+                    </div>
+                    <div class="case-description">
+                        Клієнт був переконаний, що "реклама не дає результату". Виявилось — проблема в посадковій сторінці, а не в трафіку. Переробили лендінг і точніше налаштували аудиторії. Google Ads + Facebook разом вийшли в нуль за перший місяць, далі — у плюс.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">Що кажуть наші клієнти</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"До Traffic Solo ми зливали бюджет на холодний трафік без жодної логіки. За три місяці вийшли на ROAS 4.8x і нарешті розуміємо, куди йде кожна гривня."</p>
+                    <div class="testimonial-author">Олена К.</div>
+                    <div class="testimonial-role">Власниця магазину одягу, e-commerce</div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Команда зменшила вартість ліда більш ніж удвічі та підняла Quality Score у Google Ads. Звіти прозорі, менеджер на зв'язку завжди."</p>
+                    <div class="testimonial-author">Андрій М.</div>
+                    <div class="testimonial-role">Засновник, B2B SaaS / CRM</div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Думав, що проблема в рекламі, а виявилось — у посадковій сторінці. Команда це виявила і виправила. Перший місяць вийшли в нуль, далі — тільки зростання."</p>
+                    <div class="testimonial-author">Марина Т.</div>
+                    <div class="testimonial-role">Онлайн-школа, освіта</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title fade-in">Часті запитання</h2>
+            <div class="faq-list">
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Який мінімальний бюджет на рекламу для співпраці?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">Ми рекомендуємо стартувати з рекламного бюджету від $1,000/місяць — менші бюджети складно ефективно тестувати та масштабувати.</div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>З якими типами бізнесу ви працюєте?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">Найчастіше — з e-commerce, SaaS, онлайн-освітою, B2B та сервісним бізнесом, але аналізуємо кожен запит індивідуально.</div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Що я отримаю на безкоштовній консультації?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">Аудит поточних кампаній (якщо є), визначення головної причини слабких результатів, дорожню карту на перші 3 місяці та оцінку потенціалу ROI для вашого бізнесу. Займає 30 хвилин і нічого не коштує.</div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Хто веде мою кампанію?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">Персональний менеджер, закріплений за вашим проєктом. Він знає вашу нішу, цілі та надає не лише звіти, а й стратегічні рекомендації.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="form">
+        <div class="container">
+            <div class="form-container">
+                <h2 class="form-title fade-in">Отримайте безкоштовну консультацію</h2>
+                <div class="urgency-banner fade-in">🔥 Безкоштовний аудит та консультація — для перших 10 заявок цього місяця</div>
+                <form id="contactForm" novalidate>
+                    <div class="form-group fade-in">
+                        <label for="name">Ваше ім'я</label>
+                        <input type="text" id="name" name="name" placeholder="Максим Петренко">
+                    </div>
+                    <div class="form-group fade-in">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="maksym@kompaniya.com">
+                    </div>
+                    <div class="form-group fade-in">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+380 (XX) XXX XX XX" required>
+                    </div>
+                    <div class="form-group fade-in">
+                        <label for="business">Вид бізнесу</label>
+                        <select id="business" name="business">
+                            <option value="">Оберіть тип бізнесу</option>
+                            <option value="ecommerce">E-commerce (магазин)</option>
+                            <option value="saas">SaaS / Програмне забезпечення</option>
+                            <option value="services">Послуги (консалтинг, аутсорсинг)</option>
+                            <option value="education">Онлайн освіта / курси</option>
+                            <option value="b2b">B2B Виробництво / орт</option>
+                            <option value="other">Інше</option>
+                        </select>
+                    </div>
+                    <div class="form-group fade-in">
+                        <label for="budget">Бюджет на рекламу</label>
+                        <select id="budget" name="budget">
+                            <option value="">Оберіть діапазон</option>
+                            <option value="1000-5000">$1,000 - $5,000/місяць</option>
+                            <option value="5000-10000">$5,000 - $10,000/місяць</option>
+                            <option value="10000+">$10,000+/місяць</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="form-submit fade-in">Отримати консультацію</button>
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+                <a href="https://t.me/OX_Novak" class="telegram-cta-link fade-in" target="_blank">✈️ Або напишіть нам напряму в Telegram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <h2 class="section-title fade-in">Контакти</h2>
+            <div class="contacts-content">
+                <div class="contact-info fade-in">
+                    <div class="contact-pills">
+                        <a href="mailto:traffic.solo.ua@gmail.com" class="contact-pill">
+                            <span class="contact-pill-icon">✉️</span>
+                            <span>Email</span>
+                        </a>
+                        <a href="https://t.me/OX_Novak" target="_blank" class="contact-pill">
+                            <span class="contact-pill-icon">✈️</span>
+                            <span>Telegram</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-message fade-in">
+                    <h4>Що ви отримаєте, працюючи з нами</h4>
+                    <ul class="about-features">
+                        <li><strong>Персональний менеджер</strong>, який знає вашу нішу та цілі</li>
+                        <li><strong>Прозорі звіти</strong> та дашборди в реальному часі</li>
+                        <li><strong>Стратегію</strong>, побудовану під ваш бюджет і бізнес</li>
+                        <li><strong>Постійні тести</strong> креативів, аудиторій та посадкових сторінок</li>
+                        <li><strong>Системне масштабування</strong> без втрати ROI</li>
+                        <li><strong>Чесну комунікацію</strong> — без зайвих обіцянок</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating CTA Button -->
+    <a href="https://t.me/OX_Novak" class="floating-cta" target="_blank" title="Telegram">✈️</a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Traffic Solo. Всі права захищені. | Управління Google Ads та Meta Ads з результатом</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                question.parentElement.classList.toggle('open');
+            });
+        });
+
+        // Form validation and submission
+        const form = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validation
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const business = document.getElementById('business').value;
+            const budget = document.getElementById('budget').value;
+
+            if (!phone) {
+                formMessage.textContent = 'Будь ласка, вкажіть номер телефону';
+                formMessage.className = 'form-message error';
+                return;
+            }
+
+            // Email validation (only if provided)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email && !emailRegex.test(email)) {
+                formMessage.textContent = 'Введіть коректну email адресу';
+                formMessage.className = 'form-message error';
+                return;
+            }
+
+            // Phone validation (basic)
+            if (phone.length < 5) {
+                formMessage.textContent = 'Введіть коректний номер телефону';
+                formMessage.className = 'form-message error';
+                return;
+            }
+
+            // Form submission simulation
+            const submitBtn = document.querySelector('.form-submit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Надсилання...';
+
+            // Simulate form submission
+            setTimeout(() => {
+                formMessage.textContent = '✓ Спасибо! Ми отримали вашу заявку. Менеджер зв\'яжеться з вами найближчим часом.';
+                formMessage.className = 'form-message success';
+
+                // Reset form
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отримати консультацію';
+
+                // Clear message after 5 seconds
+                setTimeout(() => {
+                    formMessage.className = 'form-message';
+                }, 5000);
+            }, 800);
+        });
+
+        // Clear error message on input
+        document.querySelectorAll('input, select').forEach(field => {
+            field.addEventListener('focus', () => {
+                if (formMessage.classList.contains('error')) {
+                    formMessage.className = 'form-message';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
