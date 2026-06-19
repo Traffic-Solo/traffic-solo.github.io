@@ -31,7 +31,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
+            background-color: #0a0a0a; background-image: radial-gradient(circle at 0% 15%, rgba(0, 200, 83, 0.07), transparent 35%), radial-gradient(circle at 100% 70%, rgba(0, 200, 83, 0.06), transparent 35%); background-attachment: fixed;
             color: #e0e0e0;
             line-height: 1.6;
             overflow-x: hidden;
@@ -192,6 +192,26 @@
             color: #00E64D;
             border-color: #00E64D;
             box-shadow: 0 0 25px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Section Divider */
+        .section-divider {
+            position: relative;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 200, 83, 0.35), transparent);
+        }
+
+        .section-divider::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #00C853;
+            box-shadow: 0 0 12px rgba(0, 200, 83, 0.7);
         }
 
         /* Hero Section */
@@ -409,6 +429,89 @@
             margin-top: 1.75rem;
         }
 
+        .services-extra-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .service-num-card {
+            position: relative;
+            background-color: #1a1a1a;
+            border: 1px solid rgba(0, 200, 83, 0.2);
+            border-radius: 16px;
+            padding: 1.75rem;
+            padding-bottom: 4.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-num-card:hover {
+            border-color: #00C853;
+            transform: translateY(-4px);
+        }
+
+        .service-num-card.highlight {
+            background: linear-gradient(160deg, #14271c 0%, #0d1410 100%);
+            border-color: rgba(0, 200, 83, 0.4);
+        }
+
+        .service-num {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: rgba(0, 200, 83, 0.35);
+            margin-bottom: 0.75rem;
+            letter-spacing: -1px;
+        }
+
+        .service-num-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #e0e0e0;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-tags span {
+            font-size: 0.76rem;
+            padding: 0.35rem 0.75rem;
+            border: 1px solid rgba(0, 200, 83, 0.3);
+            border-radius: 100px;
+            color: #a0a0a0;
+        }
+
+        .service-arrow {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 200, 83, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00C853;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-arrow:hover {
+            background-color: #00C853;
+            color: #0a0a0a;
+        }
+
+        @media (max-width: 900px) {
+            .services-extra-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Why Us Section */
         .why-us {
             padding: 80px 0;
@@ -424,21 +527,24 @@
         .value-box {
             background-color: rgba(0, 200, 83, 0.05);
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 16px;
             border: 1px solid rgba(0, 200, 83, 0.15);
-            text-align: center;
+            text-align: left;
             transition: all 0.3s ease;
         }
 
         .value-box:hover {
             background-color: rgba(0, 200, 83, 0.1);
             border-color: #00C853;
-            transform: translateY(-8px);
+            transform: translateY(-6px);
         }
 
-        .value-icon {
-            font-size: 2.5rem;
+        .value-num {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: rgba(0, 200, 83, 0.35);
             margin-bottom: 1rem;
+            letter-spacing: -1px;
         }
 
         .value-box h4 {
@@ -594,6 +700,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
             font-weight: 700;
             font-size: 0.9rem;
         }
@@ -892,6 +999,7 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
@@ -930,6 +1038,7 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
@@ -962,41 +1071,74 @@
                     <a href="#" class="cta-button cta-button-secondary js-open-consult service-cta">Замовити послугу</a>
                 </div>
             </div>
+            <div class="services-extra-grid">
+                <div class="service-num-card fade-in">
+                    <div class="service-num">03</div>
+                    <h4>Стратегія та аудит</h4>
+                    <div class="service-tags">
+                        <span>Аудит поточних кампаній</span>
+                        <span>Пошук точок росту</span>
+                        <span>План на 3 місяці</span>
+                    </div>
+                    <a href="#" class="service-arrow js-open-consult" aria-label="Замовити послугу">→</a>
+                </div>
+                <div class="service-num-card highlight fade-in">
+                    <div class="service-num">04</div>
+                    <h4>Лендінги та CRO</h4>
+                    <div class="service-tags">
+                        <span>Розробка посадкових сторінок</span>
+                        <span>A/B тести офера</span>
+                        <span>Підвищення конверсії</span>
+                    </div>
+                    <a href="#" class="service-arrow js-open-consult" aria-label="Замовити послугу">→</a>
+                </div>
+                <div class="service-num-card fade-in">
+                    <div class="service-num">05</div>
+                    <h4>Аналітика та звітність</h4>
+                    <div class="service-tags">
+                        <span>Дашборди в реальному часі</span>
+                        <span>Наскрізна аналітика</span>
+                        <span>Щомісячні звіти</span>
+                    </div>
+                    <a href="#" class="service-arrow js-open-consult" aria-label="Замовити послугу">→</a>
+                </div>
+            </div>
         </div>
     </section>
 
+    <div class="section-divider"></div>
     <!-- Why Us Section -->
     <section class="why-us" id="why-us">
         <div class="container">
             <h2 class="section-title fade-in">Чому вибирають Traffic Solo</h2>
             <div class="why-us-grid">
                 <div class="value-box fade-in">
-                    <div class="value-icon">📊</div>
+                    <div class="value-num">01</div>
                     <h4>Заявки, а не покази</h4>
                     <p>Ми звітуємо в лідах, заявках і продажах — а не в охопленні чи кліках. Кожна кампанія має конкретну ціль за вартістю ліда та ROI.</p>
                 </div>
                 <div class="value-box fade-in">
-                    <div class="value-icon">👨‍💼</div>
+                    <div class="value-num">02</div>
                     <h4>Один менеджер, без передачі "по колу"</h4>
                     <p>Ваш проєкт веде одна людина від початку до кінця — знає вашу нішу, цілі та історію кампаній. Не доведеться щомісяця заново все пояснювати.</p>
                 </div>
                 <div class="value-box fade-in">
-                    <div class="value-icon">📈</div>
+                    <div class="value-num">03</div>
                     <h4>Масштабування без втрати якості</h4>
                     <p>Бюджет збільшуємо поступово і тільки на кампаніях, які вже стабільно показують результат — без різких стрибків і просідання ROI.</p>
                 </div>
                 <div class="value-box fade-in">
-                    <div class="value-icon">🎯</div>
+                    <div class="value-num">04</div>
                     <h4>Аудиторія під ваш бізнес</h4>
                     <p>Перед запуском розбираємось, хто ваш клієнт, як він шукає рішення і на що реагує — а не запускаємо типові налаштування "за замовчуванням".</p>
                 </div>
                 <div class="value-box fade-in">
-                    <div class="value-icon">💬</div>
+                    <div class="value-num">05</div>
                     <h4>Доступ до цифр у будь-який момент</h4>
                     <p>Дашборд у Looker Studio з щоденним оновленням: скільки витрачено, скільки заявок отримано, який CPA та ROAS. Не треба писати менеджеру, щоб дізнатись цифри.</p>
                 </div>
                 <div class="value-box fade-in">
-                    <div class="value-icon">⚡</div>
+                    <div class="value-num">06</div>
                     <h4>Реакція без затримок</h4>
                     <p>Якщо кампанія "просіла" або CPA виріс — ми реагуємо протягом дня, а не на наступному щомісячному дзвінку.</p>
                 </div>
@@ -1004,6 +1146,7 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
     <!-- Cases Teaser Section -->
     <section class="cases" id="cases">
         <div class="container">
@@ -1067,6 +1210,7 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <div class="container">
@@ -1074,7 +1218,7 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card fade-in">
                     <div class="testimonial-head">
-                        <div class="testimonial-avatar">ОК</div>
+                        <div class="testimonial-avatar"><svg viewBox="0 0 64 64" width="100%" height="100%"><circle cx="32" cy="32" r="32" fill="#173321"/><path d="M32 10c-9 0-15 7-15 16 0 5 2 9 4 11 1-6 2-10 11-10s10 4 11 10c2-2 4-6 4-11 0-9-6-16-15-16z" fill="#00C853"/><circle cx="32" cy="29" r="11" fill="#0f2117"/><path d="M14 58c0-10 8-16 18-16s18 6 18 16z" fill="#00C853"/></svg></div>
                         <div>
                             <div class="testimonial-author">Олена К.</div>
                             <div class="testimonial-role">Власниця магазину одягу, e-commerce</div>
@@ -1085,7 +1229,7 @@
                 </div>
                 <div class="testimonial-card fade-in">
                     <div class="testimonial-head">
-                        <div class="testimonial-avatar">АМ</div>
+                        <div class="testimonial-avatar"><svg viewBox="0 0 64 64" width="100%" height="100%"><circle cx="32" cy="32" r="32" fill="#173321"/><path d="M20 22c0-7 5-12 12-12s12 5 12 12-3 8-3 8h-18s-3-1-3-8z" fill="#00C853"/><circle cx="32" cy="28" r="10" fill="#0f2117"/><path d="M24 36c0 4 3 7 8 7s8-3 8-7" stroke="#173321" stroke-width="2" fill="none"/><path d="M13 58c0-10 9-16 19-16s19 6 19 16z" fill="#00C853"/></svg></div>
                         <div>
                             <div class="testimonial-author">Андрій М.</div>
                             <div class="testimonial-role">Засновник, B2B SaaS / CRM</div>
@@ -1096,7 +1240,7 @@
                 </div>
                 <div class="testimonial-card fade-in">
                     <div class="testimonial-head">
-                        <div class="testimonial-avatar">МТ</div>
+                        <div class="testimonial-avatar"><svg viewBox="0 0 64 64" width="100%" height="100%"><circle cx="32" cy="32" r="32" fill="#173321"/><path d="M32 9c-10 0-17 8-17 18 0 7 2 13 5 17 0-9 1-15 12-15s12 6 12 15c3-4 5-10 5-17 0-10-7-18-17-18z" fill="#00C853"/><circle cx="32" cy="28" r="10.5" fill="#0f2117"/><path d="M12 58c0-10 9-16 20-16s20 6 20 16z" fill="#00C853"/></svg></div>
                         <div>
                             <div class="testimonial-author">Марина Т.</div>
                             <div class="testimonial-role">Онлайн-школа, освіта</div>
@@ -1109,6 +1253,7 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
     <!-- FAQ Section -->
     <section class="faq" id="faq">
         <div class="container">
