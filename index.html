@@ -565,6 +565,21 @@
             color: #666;
         }
 
+        .phone-input-group {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .phone-input-group select {
+            width: auto;
+            flex: 0 0 110px;
+            padding: 1rem 0.5rem;
+        }
+
+        .phone-input-group input {
+            flex: 1;
+        }
+
         .form-submit {
             width: 100%;
             padding: 1.1rem;
@@ -1218,7 +1233,29 @@
                     </div>
                     <div class="form-group fade-in">
                         <label for="phone">Телефон *</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+380 (XX) XXX XX XX" required>
+                        <div class="phone-input-group">
+                            <select id="phoneCountry" aria-label="Код країни">
+                                <option value="380" data-len="9" selected>🇺🇦 +380</option>
+                                <option value="48" data-len="9">🇵🇱 +48</option>
+                                <option value="49" data-len="11">🇩🇪 +49</option>
+                                <option value="1" data-len="10">🇺🇸 +1</option>
+                                <option value="44" data-len="10">🇬🇧 +44</option>
+                                <option value="420" data-len="9">🇨🇿 +420</option>
+                                <option value="421" data-len="9">🇸🇰 +421</option>
+                                <option value="40" data-len="9">🇷🇴 +40</option>
+                                <option value="370" data-len="8">🇱🇹 +370</option>
+                                <option value="371" data-len="8">🇱🇻 +371</option>
+                                <option value="372" data-len="8">🇪🇪 +372</option>
+                                <option value="373" data-len="8">🇲🇩 +373</option>
+                                <option value="34" data-len="9">🇪🇸 +34</option>
+                                <option value="39" data-len="10">🇮🇹 +39</option>
+                                <option value="33" data-len="9">🇫🇷 +33</option>
+                                <option value="31" data-len="9">🇳🇱 +31</option>
+                                <option value="972" data-len="9">🇮🇱 +972</option>
+                                <option value="995" data-len="9">🇬🇪 +995</option>
+                            </select>
+                            <input type="tel" id="phone" name="phone" inputmode="numeric" autocomplete="tel-national" placeholder="501234567" maxlength="9" required>
+                        </div>
                     </div>
                     <div class="form-group fade-in">
                         <label for="business">Вид бізнесу</label>
@@ -1333,6 +1370,23 @@
         // Form validation and submission
         const form = document.getElementById('contactForm');
         const formMessage = document.getElementById('formMessage');
+        const phoneInput = document.getElementById('phone');
+        const phoneCountry = document.getElementById('phoneCountry');
+
+        function currentPhoneLength() {
+            return parseInt(phoneCountry.selectedOptions[0].dataset.len, 10);
+        }
+
+        function maskPhoneInput() {
+            const len = currentPhoneLength();
+            phoneInput.maxLength = len;
+            phoneInput.placeholder = '5'.padEnd(len, '0');
+            phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, len);
+        }
+
+        phoneInput.addEventListener('input', maskPhoneInput);
+        phoneCountry.addEventListener('change', maskPhoneInput);
+        maskPhoneInput();
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1340,11 +1394,13 @@
             // Validation
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
+            const phoneDigits = phoneInput.value.trim();
+            const expectedLen = currentPhoneLength();
+            const phone = '+' + phoneCountry.value + phoneDigits;
             const business = document.getElementById('business').value;
             const budget = document.getElementById('budget').value;
 
-            if (!phone) {
+            if (!phoneDigits) {
                 formMessage.textContent = 'Будь ласка, вкажіть номер телефону';
                 formMessage.className = 'form-message error';
                 return;
@@ -1358,9 +1414,9 @@
                 return;
             }
 
-            // Phone validation (basic)
-            if (phone.length < 5) {
-                formMessage.textContent = 'Введіть коректний номер телефону';
+            // Phone validation — exact digit count for selected country
+            if (phoneDigits.length !== expectedLen) {
+                formMessage.textContent = `Номер має містити ${expectedLen} цифр після коду країни`;
                 formMessage.className = 'form-message error';
                 return;
             }
