@@ -1365,26 +1365,37 @@
                 return;
             }
 
-            // Form submission simulation
+            // Send lead to backend (Telegram + GA4)
             const submitBtn = document.querySelector('.form-submit');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Надсилання...';
 
-            // Simulate form submission
-            setTimeout(() => {
-                formMessage.textContent = '✓ Спасибо! Ми отримали вашу заявку. Менеджер зв\'яжеться з вами найближчим часом.';
-                formMessage.className = 'form-message success';
+            fetch('https://traffic-solo-leads.axxx1616.workers.dev', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, phone, business, budget })
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error('Request failed');
+                    return res.json();
+                })
+                .then(() => {
+                    formMessage.textContent = '✓ Дякуємо! Ми отримали вашу заявку. Менеджер зв\'яжеться з вами найближчим часом.';
+                    formMessage.className = 'form-message success';
+                    form.reset();
+                })
+                .catch(() => {
+                    formMessage.textContent = 'Не вдалося надіслати заявку. Спробуйте ще раз або напишіть нам у Telegram.';
+                    formMessage.className = 'form-message error';
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Отримати консультацію';
 
-                // Reset form
-                form.reset();
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Отримати консультацію';
-
-                // Clear message after 5 seconds
-                setTimeout(() => {
-                    formMessage.className = 'form-message';
-                }, 5000);
-            }, 800);
+                    setTimeout(() => {
+                        formMessage.className = 'form-message';
+                    }, 5000);
+                });
         });
 
         // Clear error message on input
