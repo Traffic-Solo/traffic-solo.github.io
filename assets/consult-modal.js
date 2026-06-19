@@ -22,14 +22,83 @@
         .consult-modal {
             position: relative;
             width: 100%;
-            max-width: 480px;
+            max-width: 880px;
             max-height: 90vh;
             overflow-y: auto;
             background-color: #111;
             border: 1px solid rgba(0, 200, 83, 0.3);
             border-radius: 20px;
-            padding: 2.5rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 200, 83, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .consult-info {
+            background: linear-gradient(160deg, #161616 0%, #0d0d0d 100%);
+            border-right: 1px solid rgba(0, 200, 83, 0.15);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .consult-info h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .consult-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.75rem;
+        }
+
+        .consult-info li {
+            padding: 0.6rem 0;
+            padding-left: 1.6rem;
+            position: relative;
+            color: #c0c0c0;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .consult-info li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00C853;
+            font-weight: bold;
+        }
+
+        .consult-info-quote {
+            border-left: 3px solid #00C853;
+            padding-left: 1rem;
+            color: #888;
+            font-size: 0.85rem;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .consult-form-col {
+            padding: 2.5rem;
+        }
+
+        @media (max-width: 720px) {
+            .consult-modal {
+                grid-template-columns: 1fr;
+            }
+
+            .consult-info {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 200, 83, 0.15);
+                padding: 2rem;
+            }
+
+            .consult-form-col {
+                padding: 2rem;
+            }
         }
 
         .consult-modal-close {
@@ -65,18 +134,6 @@
         .consult-modal .consult-subtitle {
             color: #a0a0a0;
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .consult-urgency {
-            background-color: rgba(0, 200, 83, 0.1);
-            border: 1px solid rgba(0, 200, 83, 0.4);
-            border-radius: 12px;
-            padding: 0.75rem 1rem;
-            text-align: center;
-            color: #00C853;
-            font-weight: 600;
-            font-size: 0.85rem;
             margin-bottom: 1.5rem;
         }
 
@@ -185,68 +242,80 @@
     overlay.innerHTML = `
         <div class="consult-modal">
             <button type="button" class="consult-modal-close" aria-label="Закрити">&times;</button>
-            <h2>Отримайте консультацію</h2>
-            <p class="consult-subtitle">Залиште номер — менеджер зв'яжеться з вами протягом робочого дня.</p>
-            <div class="consult-urgency">🔥 Безкоштовний аудит та консультація — для перших 10 заявок цього місяця</div>
-            <form id="consultForm" novalidate>
-                <div class="consult-group">
-                    <label for="consultName">Ваше ім'я</label>
-                    <input type="text" id="consultName" placeholder="Максим Петренко">
-                </div>
-                <div class="consult-group">
-                    <label for="consultEmail">Email</label>
-                    <input type="email" id="consultEmail" placeholder="maksym@kompaniya.com">
-                </div>
-                <div class="consult-group">
-                    <label for="consultPhone">Телефон *</label>
-                    <div class="consult-phone-group">
-                        <select id="consultPhoneCountry" aria-label="Код країни">
-                            <option value="380" data-len="9" selected>🇺🇦 +380</option>
-                            <option value="48" data-len="9">🇵🇱 +48</option>
-                            <option value="49" data-len="11">🇩🇪 +49</option>
-                            <option value="1" data-len="10">🇺🇸 +1</option>
-                            <option value="44" data-len="10">🇬🇧 +44</option>
-                            <option value="420" data-len="9">🇨🇿 +420</option>
-                            <option value="421" data-len="9">🇸🇰 +421</option>
-                            <option value="40" data-len="9">🇷🇴 +40</option>
-                            <option value="370" data-len="8">🇱🇹 +370</option>
-                            <option value="371" data-len="8">🇱🇻 +371</option>
-                            <option value="372" data-len="8">🇪🇪 +372</option>
-                            <option value="373" data-len="8">🇲🇩 +373</option>
-                            <option value="34" data-len="9">🇪🇸 +34</option>
-                            <option value="39" data-len="10">🇮🇹 +39</option>
-                            <option value="33" data-len="9">🇫🇷 +33</option>
-                            <option value="31" data-len="9">🇳🇱 +31</option>
-                            <option value="972" data-len="9">🇮🇱 +972</option>
-                            <option value="995" data-len="9">🇬🇪 +995</option>
-                        </select>
-                        <input type="tel" id="consultPhone" inputmode="numeric" autocomplete="tel-national" placeholder="501234567" maxlength="9" required>
+            <div class="consult-info">
+                <h3>Що ви отримаєте на консультації</h3>
+                <ul>
+                    <li>Аудит поточних кампаній (якщо є)</li>
+                    <li>Визначення головної причини слабких результатів</li>
+                    <li>Дорожню карту на перші 3 місяці</li>
+                    <li>Оцінку потенціалу ROI для вашого бізнесу</li>
+                    <li>Персонального менеджера з першого дня</li>
+                </ul>
+                <p class="consult-info-quote">"Перший місяць вийшли в нуль, далі — тільки зростання" — клієнт з ніші онлайн-освіти</p>
+            </div>
+            <div class="consult-form-col">
+                <h2>Отримайте консультацію</h2>
+                <p class="consult-subtitle">Залиште номер — менеджер зв'яжеться з вами протягом робочого дня.</p>
+                <form id="consultForm" novalidate>
+                    <div class="consult-group">
+                        <label for="consultName">Ваше ім'я</label>
+                        <input type="text" id="consultName" placeholder="Максим Петренко">
                     </div>
-                </div>
-                <div class="consult-group">
-                    <label for="consultBusiness">Вид бізнесу</label>
-                    <select id="consultBusiness">
-                        <option value="">Оберіть тип бізнесу</option>
-                        <option value="ecommerce">E-commerce (магазин)</option>
-                        <option value="saas">SaaS / Програмне забезпечення</option>
-                        <option value="services">Послуги (консалтинг, аутсорсинг)</option>
-                        <option value="education">Онлайн освіта / курси</option>
-                        <option value="b2b">B2B Виробництво / орт</option>
-                        <option value="other">Інше</option>
-                    </select>
-                </div>
-                <div class="consult-group">
-                    <label for="consultBudget">Бюджет на рекламу</label>
-                    <select id="consultBudget">
-                        <option value="">Оберіть діапазон</option>
-                        <option value="1000-5000">$1,000 - $5,000/місяць</option>
-                        <option value="5000-10000">$5,000 - $10,000/місяць</option>
-                        <option value="10000+">$10,000+/місяць</option>
-                    </select>
-                </div>
-                <button type="submit" class="consult-submit">Отримати консультацію</button>
-                <div class="consult-message" id="consultMessage"></div>
-            </form>
+                    <div class="consult-group">
+                        <label for="consultEmail">Email</label>
+                        <input type="email" id="consultEmail" placeholder="maksym@kompaniya.com">
+                    </div>
+                    <div class="consult-group">
+                        <label for="consultPhone">Телефон *</label>
+                        <div class="consult-phone-group">
+                            <select id="consultPhoneCountry" aria-label="Код країни">
+                                <option value="380" data-len="9" selected>🇺🇦 +380</option>
+                                <option value="48" data-len="9">🇵🇱 +48</option>
+                                <option value="49" data-len="11">🇩🇪 +49</option>
+                                <option value="1" data-len="10">🇺🇸 +1</option>
+                                <option value="44" data-len="10">🇬🇧 +44</option>
+                                <option value="420" data-len="9">🇨🇿 +420</option>
+                                <option value="421" data-len="9">🇸🇰 +421</option>
+                                <option value="40" data-len="9">🇷🇴 +40</option>
+                                <option value="370" data-len="8">🇱🇹 +370</option>
+                                <option value="371" data-len="8">🇱🇻 +371</option>
+                                <option value="372" data-len="8">🇪🇪 +372</option>
+                                <option value="373" data-len="8">🇲🇩 +373</option>
+                                <option value="34" data-len="9">🇪🇸 +34</option>
+                                <option value="39" data-len="10">🇮🇹 +39</option>
+                                <option value="33" data-len="9">🇫🇷 +33</option>
+                                <option value="31" data-len="9">🇳🇱 +31</option>
+                                <option value="972" data-len="9">🇮🇱 +972</option>
+                                <option value="995" data-len="9">🇬🇪 +995</option>
+                            </select>
+                            <input type="tel" id="consultPhone" inputmode="numeric" autocomplete="tel-national" placeholder="501234567" maxlength="9" required>
+                        </div>
+                    </div>
+                    <div class="consult-group">
+                        <label for="consultBusiness">Вид бізнесу</label>
+                        <select id="consultBusiness">
+                            <option value="">Оберіть тип бізнесу</option>
+                            <option value="ecommerce">E-commerce (магазин)</option>
+                            <option value="saas">SaaS / Програмне забезпечення</option>
+                            <option value="services">Послуги (консалтинг, аутсорсинг)</option>
+                            <option value="education">Онлайн освіта / курси</option>
+                            <option value="b2b">B2B Виробництво / орт</option>
+                            <option value="other">Інше</option>
+                        </select>
+                    </div>
+                    <div class="consult-group">
+                        <label for="consultBudget">Бюджет на рекламу</label>
+                        <select id="consultBudget">
+                            <option value="">Оберіть діапазон</option>
+                            <option value="1000-5000">$1,000 - $5,000/місяць</option>
+                            <option value="5000-10000">$5,000 - $10,000/місяць</option>
+                            <option value="10000+">$10,000+/місяць</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="consult-submit">Отримати консультацію</button>
+                    <div class="consult-message" id="consultMessage"></div>
+                </form>
+            </div>
         </div>
     `;
     document.body.appendChild(overlay);
