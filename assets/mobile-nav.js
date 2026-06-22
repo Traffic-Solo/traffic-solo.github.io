@@ -46,7 +46,7 @@
             inset: 0;
             background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(2px);
-            z-index: 1090;
+            z-index: 999;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease;
@@ -107,7 +107,7 @@
 
     var backdrop = document.createElement('div');
     backdrop.className = 'nav-backdrop';
-    document.body.appendChild(backdrop);
+    header.appendChild(backdrop);
 
     function closeNav() {
         nav.classList.remove('nav-open');
