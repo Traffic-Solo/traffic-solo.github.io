@@ -17,7 +17,6 @@
             background: transparent;
             border: none;
             cursor: pointer;
-            z-index: 1101;
         }
 
         .burger-btn span {
@@ -46,7 +45,7 @@
             inset: 0;
             background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(2px);
-            z-index: 999;
+            z-index: 9990;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease;
@@ -57,41 +56,65 @@
             visibility: visible;
         }
 
+        .mobile-drawer-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: min(78vw, 320px);
+            margin: 0;
+            background-color: #0d0d0d;
+            border-left: 1px solid rgba(0, 200, 83, 0.25);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 1.75rem;
+            padding: 6rem 2.25rem 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 9999;
+        }
+
+        .mobile-drawer-nav.open {
+            transform: translateX(0);
+        }
+
+        .mobile-drawer-nav a {
+            font-size: 1rem;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .mobile-drawer-nav a:hover,
+        .mobile-drawer-nav a[aria-current="page"] {
+            color: #00C853;
+        }
+
+        .mobile-drawer-nav a.cta-button,
+        .mobile-drawer-nav a.pill-button {
+            margin-top: 0.5rem;
+            color: #0a0a0a;
+        }
+
         @media (max-width: 768px) {
             .burger-btn {
                 display: flex;
             }
 
             header nav {
-                position: fixed;
-                top: 0;
-                right: 0;
-                height: 100vh;
-                width: min(78vw, 320px);
-                margin: 0;
-                background-color: #0d0d0d;
-                border-left: 1px solid rgba(0, 200, 83, 0.25);
-                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: center;
-                gap: 1.75rem;
-                padding: 6rem 2.25rem 2rem;
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
-                z-index: 1100;
+                display: none !important;
             }
+        }
 
-            header nav.nav-open {
-                transform: translateX(0);
-            }
-
-            header nav a {
-                font-size: 1rem;
-            }
-
-            header nav a.cta-button {
-                margin-top: 0.5rem;
+        @media (min-width: 769px) {
+            .mobile-drawer-nav,
+            .nav-backdrop {
+                display: none;
             }
         }
     `;
@@ -105,12 +128,17 @@
     burger.innerHTML = '<span></span><span></span><span></span>';
     nav.parentNode.insertBefore(burger, nav);
 
+    var drawer = document.createElement('nav');
+    drawer.className = 'mobile-drawer-nav';
+    drawer.innerHTML = nav.innerHTML;
+    document.body.appendChild(drawer);
+
     var backdrop = document.createElement('div');
     backdrop.className = 'nav-backdrop';
-    header.appendChild(backdrop);
+    document.body.appendChild(backdrop);
 
     function closeNav() {
-        nav.classList.remove('nav-open');
+        drawer.classList.remove('open');
         burger.classList.remove('open');
         backdrop.classList.remove('open');
         burger.setAttribute('aria-expanded', 'false');
@@ -118,7 +146,7 @@
     }
 
     function openNav() {
-        nav.classList.add('nav-open');
+        drawer.classList.add('open');
         burger.classList.add('open');
         backdrop.classList.add('open');
         burger.setAttribute('aria-expanded', 'true');
@@ -126,7 +154,7 @@
     }
 
     burger.addEventListener('click', function () {
-        if (nav.classList.contains('nav-open')) {
+        if (drawer.classList.contains('open')) {
             closeNav();
         } else {
             openNav();
@@ -135,7 +163,7 @@
 
     backdrop.addEventListener('click', closeNav);
 
-    nav.querySelectorAll('a').forEach(function (a) {
+    drawer.querySelectorAll('a').forEach(function (a) {
         a.addEventListener('click', closeNav);
     });
 
