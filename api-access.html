@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Solo — доступ до Google Ads API</title>
+    <meta name="description" content="Traffic Solo використовує Google Ads API для автоматизованого управління рекламними кампаніями клієнтів через Google Ads MCC.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-56S8RML2');</script>
+    <!-- End Google Tag Manager -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; background-image: radial-gradient(circle at 0% 15%, rgba(0, 200, 83, 0.07), transparent 35%), radial-gradient(circle at 100% 70%, rgba(0, 200, 83, 0.06), transparent 35%); background-attachment: fixed;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 200, 83, 0.2);
+            padding: 1rem 0;
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #00C853;
+            text-decoration: none;
+            letter-spacing: -1px; display: inline-flex; align-items: center; gap: 0.5rem;}
+        .logo-icon { width: 2.4rem; height: 2.4rem; display: block; }
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { color: #e0e0e0; text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; position: relative; padding-left: 1.3rem; }
+        nav a.cta-button { padding-left: 1.75rem; }
+        nav a:not(.cta-button)::before { content: '+'; position: absolute; left: 0; color: rgba(0, 200, 83, 0.5); font-weight: 400; }
+        nav a:hover { color: #00C853; }
+        .cta-button {
+            background-color: #00C853;
+            color: #0a0a0a;
+            padding: 0.85rem 1.75rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.25);
+        }
+        .cta-button:hover { background-color: #00E64D; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0, 200, 83, 0.4); }
+        .policy { padding: 60px 0 80px; }
+        .policy h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .policy .updated { color: #888; font-size: 0.9rem; margin-bottom: 2.5rem; }
+        .policy h2 {
+            font-size: 1.3rem;
+            color: #00C853;
+            margin: 2.5rem 0 1rem;
+        }
+        .policy p, .policy li { color: #c0c0c0; margin-bottom: 1rem; }
+        .policy ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+        .policy a { color: #00C853; text-decoration: none; }
+        .policy a:hover { text-decoration: underline; }
+        footer {
+            background-color: #0a0a0a;
+            border-top: 1px solid rgba(0, 200, 83, 0.2);
+            padding: 2rem 0;
+            text-align: center;
+            color: #888;
+        }
+        footer a { color: #888; text-decoration: none; }
+
+        .site-footer { background-color: #0a0a0a; border-top: 1px solid rgba(0, 200, 83, 0.2); padding: 4rem 0 0; }
+        .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
+        .footer-socials { display: flex; gap: 0.75rem; }
+        .footer-icon { width: 48px; height: 48px; border-radius: 50%; background-color: #00C853; color: #0a0a0a; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; }
+        .footer-icon:hover { background-color: #00E64D; transform: translateY(-3px); }
+        .footer-support-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem; border-radius: 100px; background-color: #1a1a1a; border: 1px solid rgba(0, 200, 83, 0.3); color: #e0e0e0; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.3s ease; }
+        .footer-support-btn:hover { border-color: #00C853; color: #00C853; }
+        .footer-email-tag { display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; background-color: rgba(0, 200, 83, 0.15); color: #00C853; padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 1rem; }
+        .footer-email { display: block; text-decoration: none; color: #fff; font-weight: 800; line-height: 1.05; font-size: clamp(1.6rem, 6vw, 4rem); letter-spacing: -0.02em; word-break: break-all; margin-bottom: 2.5rem; transition: color 0.3s ease; }
+        .footer-email:hover { color: #00C853; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 1.5rem 0; color: #888; font-size: 0.85rem; }
+        .footer-links a { color: #888; text-decoration: none; margin: 0 0.4rem; }
+        .footer-links a:hover { color: #00C853; }
+        @media (max-width: 600px) {
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .floating-cta {
+            position: fixed;
+            bottom: 6.4rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background-color: #00C853;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0a0a;
+            cursor: pointer;
+            z-index: 999;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 200, 83, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .floating-cta:hover {
+            background-color: #00E64D;
+            transform: scale(1.1);
+        }
+
+        .floating-envelope-cta {
+            position: fixed;
+            bottom: 10.7rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background-color: #00C853;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0a0a;
+            cursor: pointer;
+            z-index: 999;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 200, 83, 0.4);
+        }
+
+        .floating-envelope-cta:hover {
+            background-color: #00E64D;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .floating-cta {
+                width: 55px;
+                height: 55px;
+                bottom: 5.9rem;
+                right: 1.5rem;
+            }
+            .floating-envelope-cta {
+                width: 55px;
+                height: 55px;
+                bottom: 9.8rem;
+                right: 1.5rem;
+            }
+        }
+
+        .floating-ai-cta {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.1rem;
+            background-color: #1a1a1a;
+            border: 1px solid rgba(0, 200, 83, 0.4);
+            border-radius: 30px;
+            color: #00C853;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            white-space: nowrap;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .floating-ai-cta:hover {
+            background-color: #222;
+            border-color: #00C853;
+            transform: translateY(-2px);
+        }
+
+        .floating-ai-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #00C853;
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .floating-ai-cta {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                font-size: 0.78rem;
+                padding: 0.6rem 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56S8RML2"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo" aria-label="Traffic Solo"><img src="assets/logo-mark.png" alt="" class="logo-icon"></a>
+            <nav>
+                <a href="/#about">Про нас</a>
+                <a href="/#services">Послуги</a>
+                <a href="pricing">Ціни</a>
+                <a href="cases">Кейси</a>
+                <a href="blog">Блог</a>
+                <a href="#" class="cta-button js-open-consult">Консультація</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="policy">
+        <div class="container">
+            <h1>Traffic Solo — доступ до Google Ads API</h1>
+            <p class="updated">Останнє оновлення: 21 липня 2026</p>
+
+            <p><strong>Traffic Solo</strong> — це рекламна агенція, яка керує Google Ads кампаніями клієнтів через власний Google Ads manager account (MCC). Для щоденної роботи з клієнтськими рекламними акаунтами Traffic Solo використовує офіційний <strong>Google Ads API</strong>.</p>
+
+            <h2>Навіщо Traffic Solo потрібен Google Ads API</h2>
+            <p>Ми керуємо рекламними кампаніями одразу для кількох клієнтів у межах однієї MCC-структури. Ручне управління кожним акаунтом окремо через інтерфейс Google Ads забирає багато часу і підвищує ризик помилок. Google Ads API дозволяє нашій команді працювати з усіма клієнтськими акаунтами послідовно, швидко та без втрати якості.</p>
+
+            <h2>Що саме робить наш застосунок через API</h2>
+            <ul>
+                <li>Створення та оновлення кампаній (Search, Shopping, Performance Max, Display, Video, App) для клієнтських акаунтів;</li>
+                <li>Управління групами оголошень, ключовими словами та мінус-словами;</li>
+                <li>Створення та оновлення оголошень і рекламних елементів (сайтлінки, уточнення, лід-форми);</li>
+                <li>Завантаження даних про конверсії для точнішої оптимізації ставок;</li>
+                <li>Формування звітів про ефективність кампаній через GAQL-запити для щотижневої та щомісячної звітності клієнтам.</li>
+            </ul>
+
+            <h2>Хто має доступ</h2>
+            <p>Доступ до інструменту мають виключно співробітники та підрядники Traffic Solo, які безпосередньо ведуть клієнтські рекламні кампанії. Дані, отримані через Google Ads API, використовуються лише для управління акаунтами конкретних клієнтів Traffic Solo та не передаються третім особам.</p>
+
+            <h2>Контакти</h2>
+            <p>Питання щодо використання Google Ads API можна надсилати на <a href="mailto:main@traffic-solo.space">main@traffic-solo.space</a>.</p>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-socials">
+                    <a href="https://t.me/traffic_solo_space" class="footer-icon" target="_blank" title="Telegram"><svg width="20" height="20" viewBox="0 0 240 240" fill="currentColor"><path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm55.4 80.3l-19.7 92.9c-1.5 6.6-5.4 8.2-10.9 5.1l-30.2-22.3-14.6 14c-1.6 1.6-3 3-6.1 3l2.2-30.9 56.3-50.9c2.4-2.2-.5-3.4-3.7-1.2l-69.6 43.8-30-9.4c-6.5-2-6.6-6.5 1.4-9.6l117.4-45.2c5.4-2 10.2 1.3 8.5 9.7z"/></svg></a>
+                    <a href="mailto:main@traffic-solo.space" class="footer-icon" title="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+                </div>
+                <a href="#" class="footer-support-btn js-open-consult">Підтримка <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+            </div>
+            <div class="footer-email-tag">&#9679; Email</div>
+            <a href="mailto:main@traffic-solo.space" class="footer-email">MAIN@TRAFFIC-SOLO.SPACE</a>
+            <div class="footer-bottom">
+                <span>&copy; 2025 Traffic Solo. Всі права захищені.</span>
+                <div class="footer-links">
+                    <a href="/">Головна</a> / <a href="cases">Кейси</a> / <a href="blog">Блог</a> / <a href="privacy-policy">Політика конфіденційності</a> / <a href="api-access">Google Ads API</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Floating CTA Button -->
+    <a href="https://t.me/traffic_solo_leads_bot" class="floating-ai-cta" target="_blank" title="AI-асистент у Telegram"><span class="floating-ai-dot"></span>Ми онлайн 24/7</a>
+
+    <a href="https://t.me/traffic_solo_space" class="floating-cta" target="_blank" title="Telegram"><svg width="28" height="28" viewBox="0 0 240 240" fill="currentColor"><path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm55.4 80.3l-19.7 92.9c-1.5 6.6-5.4 8.2-10.9 5.1l-30.2-22.3-14.6 14c-1.6 1.6-3 3-6.1 3l2.2-30.9 56.3-50.9c2.4-2.2-.5-3.4-3.7-1.2l-69.6 43.8-30-9.4c-6.5-2-6.6-6.5 1.4-9.6l117.4-45.2c5.4-2 10.2 1.3 8.5 9.7z"/></svg></a>
+    <a href="javascript:void(0)" class="floating-envelope-cta js-open-consult" title="Залишити заявку"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+
+    <script src="assets/consult-modal.js"></script>
+    <script src="assets/mobile-nav.js?v=2"></script>
+</body>
+</html>
